@@ -1,14 +1,18 @@
 #include<stdio.h>
 #define SUBJECT 5
+
+
 int main(void){
 
-    int totalGrade =0;
+    int totalPoint =0;
     int totalCredit = 0;
-
+    int gradePoint[SUBJECT];
     char subject[SUBJECT][200];
     int mark[SUBJECT];
     int credit[SUBJECT];
+    double GPA;
 
+    printf("Enter");
 
     for(int i = 0; i < SUBJECT ; i++){
         //name
@@ -23,19 +27,41 @@ int main(void){
 
         printf("Enter credit: ");
         scanf("%d", &credit[i]);
+        
+        //grade level 
+        if(mark[i]>= 90){
+            gradePoint[i]= 4;
+        }else if(mark[i]>= 80){
+            gradePoint[i] = 3;
+        }else if(mark[i] >= 70){
+            gradePoint[i] = 2;
+        }else if(mark [i]>= 60){
+            gradePoint[i] = 1;
+        }else{
+            gradePoint[i] = 0;
+        }
 
-        totalGrade += mark[i];
+        //sum of all point and credit
+        totalPoint += gradePoint[i] * credit[i];
         totalCredit += credit[i];
     }
 
-   for(int j = 0; j < SUBJECT; j++){
-         printf("%s  ", subject[j]);
-   }
+    printf("\n===== GPA Results =====\n");
 
-   printf("TotalGrade: %d\n", totalGrade);
-   printf("TotalCredit: %d\n", totalCredit);
+    //GPA calculation
+    GPA = (double) totalPoint / totalCredit;
 
+    //use loop to result
 
+    for(int j = 0; j < SUBJECT; j++){ 
+        printf("Subject%d: %s\n", j+1, subject[j]);
+        printf("Makr: %d\n", mark[j]);
+        printf("Credit: %d\n\n", credit[j]);
+    }
+
+    printf("TotalPoint: %d\n", totalPoint);
+    printf("TotalCredit: %d\n", totalCredit);
+    printf("Your GPA: %.2f\n", GPA);
 
    return 0;
 }
