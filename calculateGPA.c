@@ -1,4 +1,5 @@
 #include<stdio.h>
+#include<string.h>
 #define SUBJECT 5
 
 
@@ -20,14 +21,31 @@ int main(void){
         //credit
 
         printf("Enter Subject: ");
-        scanf("%s", subject[i]);
+        scanf(" %199[^\n]", subject[i]);
+
+        for(int k=0; k <= sizeof(subject[i]); k++){
+            printf("%s", toupper(subject[k]));
+        }
+
+        printf("%s\n", subject[i]);
 
         printf("Enter marks: ");
         scanf("%d", &mark[i]);
+        while(mark[i] >100 || mark[i] < 0){
+            printf("Enter marks(0~100)!: ");
+            scanf("%d", &mark[i]);
+        }
+
+       
 
         printf("Enter credit: ");
         scanf("%d", &credit[i]);
+        while(credit[i]>4 || credit[i]<1){
+            printf("Enter credit(1~4)!: ");
+            scanf("%d", &credit[i]);
+        }
         
+        printf("marks is :%d\n", mark[i]);
         //grade level 
         if(mark[i]>= 90){
             gradePoint[i]= 4;
@@ -41,26 +59,37 @@ int main(void){
             gradePoint[i] = 0;
         }
 
+        printf("Your grade point is : %d\n", gradePoint[i]);
+
         //sum of all point and credit
         totalPoint += gradePoint[i] * credit[i];
+        printf("total point is: %d\n", totalPoint);
+
         totalCredit += credit[i];
     }
 
-    printf("\n===== GPA Results =====\n");
-
-    //GPA calculation
-    GPA = (double) totalPoint / totalCredit;
 
     //use loop to result
-
+    printf("    Subjects        Marks    Points    Credits\n");
     for(int j = 0; j < SUBJECT; j++){ 
-        printf("Subject%d: %s\n", j+1, subject[j]);
-        printf("Makr: %d\n", mark[j]);
-        printf("Credit: %d\n\n", credit[j]);
+        printf(" %d. %-11s",j+1,subject[j]);
+        printf("    %4d", mark[j]);
+        printf("     %4d", gradePoint[j]);
+        printf("       %4d", credit[j]);
+        printf("\n");
     }
+    printf("-----------------------------------------------\n");
 
-    printf("TotalPoint: %d\n", totalPoint);
-    printf("TotalCredit: %d\n", totalCredit);
+    printf("TotalPoint: %21d\n", totalPoint);
+    printf("TotalCredit: %31d\n", totalCredit);
+
+    //GPA calculation
+    if (totalCredit > 0) {
+        GPA = (double) totalPoint / totalCredit;
+    } else {
+        GPA = 0.0;
+    }
+    printf("\n===== GPA Results =====\n");
     printf("Your GPA: %.2f\n", GPA);
 
    return 0;
