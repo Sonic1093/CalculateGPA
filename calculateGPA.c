@@ -1,6 +1,34 @@
 #include<stdio.h>
+#include<ctype.h>
 #include<string.h>
-#define SUBJECT 5
+#define SUBJECT 2
+
+////save results to file
+int saveToFile(const char *filename, char subject[][200], int mark[], int gradePoint[], int credit[], int totalPoint, int totalCredit, double GPA){
+    FILE *fp = fopen(filename, "w");
+    if(fp == NULL){
+        printf("Error: cannot open file %s\n", filename);
+        return 0;
+    }
+ 
+    fprintf(fp, "---------------------------------------------------------------------\n");
+    fprintf(fp, "   %-27s %12s %12s %12s\n", "Subject", "Marks", "Grade", "Credits");
+    for(int k = 0; k < SUBJECT; k++){
+        fprintf(fp, "%d. %-26s%12d%12d%12d\n", k+1, subject[k], mark[k], gradePoint[k], credit[k]);
+    }
+    fprintf(fp, "---------------------------------------------------------------------\n\n");
+    fprintf(fp, "*TotalPoint: %d\n", totalPoint);
+    fprintf(fp, "*TotalCredit: %d\n", totalCredit);
+    fprintf(fp, "*Your GPA: %.2f\n", GPA);
+ 
+    if(fclose(fp) != 0){
+        printf("Error: failed to close file %s\n", filename);
+        return 0;
+    }
+    return 1;
+}
+
+
 
 
 int main(void){
@@ -9,11 +37,10 @@ int main(void){
     int totalCredit = 0;
     int gradePoint[SUBJECT];
     char subject[SUBJECT][200];
+    char upperSubject[SUBJECT][200];
     int mark[SUBJECT];
     int credit[SUBJECT];
     double GPA;
-
-    printf("Enter");
 
     for(int i = 0; i < SUBJECT ; i++){
         //name
@@ -23,11 +50,11 @@ int main(void){
         printf("Enter Subject: ");
         scanf(" %199[^\n]", subject[i]);
 
-        for(int k=0; k <= sizeof(subject[i]); k++){
-            printf("%s", toupper(subject[k]));
+        int j=0;
+        while(subject[i][j] != '\0'){
+            upperSubject[i][j] = toupper((unsigned char)subject[i][j]);
+            j++;
         }
-
-        printf("%s\n", subject[i]);
 
         printf("Enter marks: ");
         scanf("%d", &mark[i]);
@@ -37,7 +64,6 @@ int main(void){
         }
 
        
-
         printf("Enter credit: ");
         scanf("%d", &credit[i]);
         while(credit[i]>4 || credit[i]<1){
@@ -68,29 +94,36 @@ int main(void){
         totalCredit += credit[i];
     }
 
-
+    printf("---------------------------------------------------------------------\n");
     //use loop to result
-    printf("    Subjects        Marks    Points    Credits\n");
+    printf("   %-27s %12s %12s %12s\n","Subject", "Marks", "Grade", "Credits");
     for(int j = 0; j < SUBJECT; j++){ 
-        printf(" %d. %-11s",j+1,subject[j]);
-        printf("    %4d", mark[j]);
-        printf("     %4d", gradePoint[j]);
-        printf("       %4d", credit[j]);
+        printf("%d. %-26s",j+1,upperSubject[j]);
+        printf("%12d", mark[j]);
+        printf("%12d", gradePoint[j]);
+        printf("%12d", credit[j]);
         printf("\n");
     }
-    printf("-----------------------------------------------\n");
+    printf("---------------------------------------------------------------------\n\n");
 
-    printf("TotalPoint: %21d\n", totalPoint);
-    printf("TotalCredit: %31d\n", totalCredit);
+    printf("*TotalPoint: %d\n", totalPoint);
+    printf("*TotalCredit: %d\n", totalCredit);
 
     //GPA calculation
     if (totalCredit > 0) {
         GPA = (double) totalPoint / totalCredit;
     } else {
-        GPA = 0.0;
+        GPA = 0.00;
     }
     printf("\n===== GPA Results =====\n");
-    printf("Your GPA: %.2f\n", GPA);
+    printf("*Your GPA: %.2f\n", GPA);
 
-   return 0;
+
+      //store data to file
+    if(saveToFile("gpa_result.txt", subject, mark, gradePoint, credit, totalPoint, totalCredit, GPA)){
+        printf("\nData saved to gpa_result.txt\n");
+    }
+    
+    
+    return 0;
 }
