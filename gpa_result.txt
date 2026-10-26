@@ -1,9 +1,9 @@
 ---------------------------------------------------------------------
    Subject                            Marks        Grade      Credits
-1. mathematci 4                        96           4           4
-2. amazoon:iadsf                       99           4           2
+1. english                             99           4           2
+2. ICT                                 88           3           2
 ---------------------------------------------------------------------
 
-*TotalPoint: 24
-*TotalCredit: 6
-*Your GPA: 4.00
+*TotalPoint: 14
+*TotalCredit: 4
+*Your GPA: 3.50

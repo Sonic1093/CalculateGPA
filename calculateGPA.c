@@ -29,8 +29,7 @@ int saveToFile(const char *filename, char subject[][200], int mark[], int gradeP
 }
 
 
-
-
+/* mainŠÖ”------------------------------------------------------------------ */
 int main(void){
 
     int totalPoint =0;
@@ -71,7 +70,7 @@ int main(void){
             scanf("%d", &credit[i]);
         }
         
-        printf("marks is :%d\n", mark[i]);
+        
         //grade level 
         if(mark[i]>= 90){
             gradePoint[i]= 4;
@@ -85,12 +84,9 @@ int main(void){
             gradePoint[i] = 0;
         }
 
-        printf("Your grade point is : %d\n", gradePoint[i]);
 
         //sum of all point and credit
         totalPoint += gradePoint[i] * credit[i];
-        printf("total point is: %d\n", totalPoint);
-
         totalCredit += credit[i];
     }
 
