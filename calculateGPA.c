@@ -4,7 +4,6 @@
 #define SUBJECT 2
 
 
-
 /* mainŠÖ”------------------------------------------------------------------ */
 int main(void){
 
@@ -89,7 +88,7 @@ int main(void){
     }
 
 
-    //counter how many user input 
+    //counter how many user input
     id ++;
 
 
