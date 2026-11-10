@@ -1,0 +1,22 @@
+Subject1:MATH
+Mark1: 88
+GradePoint1: 3
+Credit1: 3
+Subject2:ENGLISH
+Mark2: 88
+GradePoint2: 3
+Credit2: 2
+TotalPoint: 15
+TotalCredit: 5
+GPA: 3.00
+Subject1:A;DFJ
+Mark1: 99
+GradePoint1: 4
+Credit1: 3
+Subject2:AJDSLFK
+Mark2: 83
+GradePoint2: 3
+Credit2: 3
+TotalPoint: 21
+TotalCredit: 6
+GPA: 3.50
