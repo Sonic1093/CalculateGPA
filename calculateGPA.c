@@ -4,6 +4,7 @@
 #define SUBJECT 2
 
 
+
 /* mainä÷êî------------------------------------------------------------------ */
 int main(void){
 
@@ -86,7 +87,12 @@ int main(void){
         totalPoint += gradePoint[i] * credit[i];
         totalCredit += credit[i];
     }
+
+
+    //counter how many user input 
     id ++;
+
+
     printf("---------------------------------------------------------------------\n");
     //use loop to result
     printf("   %-27s %12s %12s %12s\n","Subject", "Marks", "Grade", "Credits");
